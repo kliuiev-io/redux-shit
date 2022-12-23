@@ -1,23 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
+import { Suspense, lazy } from 'react';
+
+import { Lesson10 } from './pages/Lesson10';
+
+import { createRoutesFromElements, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 function App() {
+  const router = createBrowserRouter(
+    createRoutesFromElements(
+      <Route path="/" element={<Lesson10></Lesson10>}>Home</Route>
+    )
+  );
+ 
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <RouterProvider fallback="<div>sdfsdf</div>" router={router}></RouterProvider>
     </div>
   );
 }
