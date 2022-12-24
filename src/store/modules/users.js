@@ -17,7 +17,7 @@ export default createSlice({
       removeUser: (store, action) => {
           const idx = store.findIndex(x => x !== action.payload);
 
-          if (idx !== -1) return;
+          if (idx === -1) return;
 
           store.splice(idx, 1);
       },
