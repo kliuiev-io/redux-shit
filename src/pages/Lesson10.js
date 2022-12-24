@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { counter as counterSlice, fetchUsers, users as usersSlice } from "../store/store";
+import counterModule from "../store/modules/counter";
+import usersModule, { fetchUsers } from "../store/modules/users";
 
 const Lesson10 = () => {
     const dispatch = useDispatch();
@@ -8,10 +9,10 @@ const Lesson10 = () => {
     const users = useSelector(state => state.users);
 
     const increase = () => {
-        dispatch(counterSlice.actions.increaseCounter(10));
+        dispatch(counterModule.actions.increaseCounter(10));
     }
     const decrease = () => {
-        dispatch(counterSlice.actions.decreaseCounter(10));
+        dispatch(counterModule.actions.decreaseCounter(10));
     }
 
     const addUser = () => {
@@ -19,11 +20,11 @@ const Lesson10 = () => {
             name: `Petya ${Date.now()}`,
             id: Date.now()
         }
-        dispatch(usersSlice.actions.addUser(user));
+        dispatch(usersModule.actions.addUser(user));
     }
 
     const removeUser = (id) => {
-        dispatch(usersSlice.actions.removeUser(id));
+        dispatch(usersModule.actions.removeUser(id));
     }
 
     return (
