@@ -15,7 +15,7 @@ export default createSlice({
       },
 
       removeUser: (store, action) => {
-          const idx = store.findIndex(name => name === action.payload);
+          const idx = store.indexOf(action.payload);
 
           if (idx === -1) return;
 
