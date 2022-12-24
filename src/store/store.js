@@ -1,6 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 
-export const store = configureStore({
+export const counter = createSlice({
+    name: 'counter',
     initialState: {
         counter: 20,
         lesson: {
@@ -13,21 +14,29 @@ export const store = configureStore({
         increaseCounter: (store, action) => {
             store.counter += Number(action.payload);
         },
-        
+
         decreaseCounter: (store, action) => {
-            store.counter += Number(action.payload);
+            store.counter -= Number(action.payload);
         },
-        
+
         addUser: (store, action) => {
             store.users.push(action.payload);
         },
-        
+
         removeUser: (store, action) => {
             store.users = store.users.filter(x => x !== action.payload);
         },
+
+        fetchUsers: (store, action) => {
+            fetch('https://jsonplaceholder.typicode.com/users')
+                .then(response => response.json())
+                .then(json => store.users.push(json))
+        }
     },
-    
-    test123: {
-        test321: 0
-    }
+})
+
+export const store = configureStore({
+    reducer: {
+        counter: counter.reducer,
+    },
 });
